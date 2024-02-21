@@ -1,6 +1,7 @@
-package co.edu.uniquindio.laboratoriocolecciones.controller;
+package co.edu.uniquindio.laboratoriocolecciones.model;
 
 public class Cliente {
+
 
     private String numeroId;
     private String nombre;

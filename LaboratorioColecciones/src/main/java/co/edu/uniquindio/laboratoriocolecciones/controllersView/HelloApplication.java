@@ -1,4 +1,4 @@
-package co.edu.uniquindio.laboratoriocolecciones;
+package co.edu.uniquindio.laboratoriocolecciones.controllersView;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

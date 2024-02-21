@@ -1,4 +1,4 @@
-package co.edu.uniquindio.laboratoriocolecciones;
+package co.edu.uniquindio.laboratoriocolecciones.controllersView;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
