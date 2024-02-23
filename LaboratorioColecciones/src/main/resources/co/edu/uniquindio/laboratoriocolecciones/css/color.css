@@ -1,6 +1,52 @@
-.pane{
--
+#paneMensajeBienvenida{
+    -fx-background-color: linear-gradient( to left, #ff69b4, #8e44ad);
+    -fx-background-radius: 15;
+}
+#txtInformativo1{
+    font-family: 'Helvetica', sans-serif;
+    font-size: 16px; /* Tamaño de fuente más pequeño */
+}
+#txtInformativo11{
+    font-family: 'Helvetica', sans-serif;
+    font-size: 40px; /* Tamaño de fuente más grande */
+}
 
+#paneInfoVenta,#paneBotonesDetalleVenta,#paneBotonesVenta,#paneDetalleVenta,#paneInfoCliente,#paneOpciones,#paneTable{
+    -fx-border-radius: 15;
+    -fx-border-color: linear-gradient( to left, #ff69b4, #8e44ad);
+    -fx-border-width: 2px;
+}
+#paneOpciones{
+    -fx-border-radius: 30;
+    -fx-border-color: linear-gradient( to left, #ff69b4, #8e44ad);
+    -fx-border-width: 2px;
+}
+.text-field {
+    -fx-background-color: -fx-text-box-border, -fx-background ;
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
 
+    /* Establecer el color del borde inferior */
+    -fx-border-width: 0 0 1 0; /* Solo el borde inferior */
+    -fx-border-color: transparent transparent linear-gradient(to left, #ff69b4, #8e44ad) transparent;
+}
 
- }
+.text-field:focused {
+    -fx-background-color: -fx-focus-color, -fx-background ;
+}
+
+#txtBuscador {
+    /* Restablecer las propiedades específicas para #txtBuscador */
+    -fx-border-color: linear-gradient(to left, #ff69b4, #8e44ad);
+    -fx-border-radius: 15;
+    -fx-text-fill: linear-gradient(to left, #ff69b4, #8e44ad);
+
+    /* Anular la propiedad que afecta al borde inferior de .text-field */
+    -fx-border-width: initial;
+}
+
+#paneOpciones{
+    -fx-background-color:  #8e44ad;
+    -fx-background-radius:30;
+}
+

@@ -3,6 +3,7 @@ module co.edu.uniquindio.laboratoriocolecciones {
     requires javafx.fxml;
 
     requires com.dlsc.formsfx;
+    requires lombok;
 
     opens co.edu.uniquindio.laboratoriocolecciones to javafx.fxml;
 
