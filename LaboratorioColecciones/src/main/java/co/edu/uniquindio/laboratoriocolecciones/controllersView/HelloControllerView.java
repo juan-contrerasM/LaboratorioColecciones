@@ -1,6 +1,10 @@
 package co.edu.uniquindio.laboratoriocolecciones.controllersView;
 
+import co.edu.uniquindio.laboratoriocolecciones.model.Cliente;
+import co.edu.uniquindio.laboratoriocolecciones.model.Producto;
+import co.edu.uniquindio.laboratoriocolecciones.persistencia.Persistencia;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
@@ -10,7 +14,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class HelloControllerView {
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.ResourceBundle;
+
+public class HelloControllerView implements Initializable {
+
+
 
     @FXML
     private Button btnAgregar;
@@ -84,6 +95,33 @@ public class HelloControllerView {
     @FXML
     private Text txtInformativo3;
 
+
+
+
+    public void  guardarCliente() throws IOException {
+        HashMap<String, Cliente>listaClientes=new HashMap<>();
+        Cliente cliente= new Cliente("1","juan","123456789");
+        listaClientes.put(cliente.getNumeroId(), cliente);
+
+        Persistencia.guardarClientes(listaClientes);
+
+        HashMap<String,Cliente> clientes= new HashMap<>();
+        clientes=Persistencia.cargarClientes();
+        for (Cliente cliente1: clientes.values()){
+            System.out.println(cliente1.toString());
+        }
+    }
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            guardarCliente();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 
