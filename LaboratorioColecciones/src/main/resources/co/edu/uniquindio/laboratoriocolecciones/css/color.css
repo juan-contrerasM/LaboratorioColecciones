@@ -16,11 +16,7 @@
     -fx-border-color: linear-gradient( to left, #ff69b4, #8e44ad);
     -fx-border-width: 2px;
 }
-#paneOpciones{
-    -fx-border-radius: 30;
-    -fx-border-color: linear-gradient( to left, #ff69b4, #8e44ad);
-    -fx-border-width: 2px;
-}
+
 .text-field {
     -fx-background-color: -fx-text-box-border, -fx-background ;
     -fx-background-insets: 0, 0 0 1 0 ;
@@ -48,5 +44,21 @@
 #paneOpciones{
     -fx-background-color:  #8e44ad;
     -fx-background-radius:30;
+}
+#pane_btn_lista_clientes,#pane_detalleCliente,#pane_lista_cliente, #paneOpciones{
+    -fx-border-radius: 30;
+    -fx-border-color: linear-gradient( to left, #ff69b4, #8e44ad);
+    -fx-border-width: 2px;
+    -fx-background-color: #E9E8E4;
+    -fx-background-radius:30 ;
+
+
+}
+#pane_titulo_list_clientes, #pane_titulo_detalle_cliente,#pane_btn_lista_clientes{
+    -fx-background-color: white;
+    -fx-background-radius:30 ;
+    -fx-border-radius:30;
+-fx-padding: 10;
+
 }
 

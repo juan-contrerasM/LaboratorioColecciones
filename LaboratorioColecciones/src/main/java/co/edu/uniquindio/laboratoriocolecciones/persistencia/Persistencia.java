@@ -24,12 +24,12 @@ public class Persistencia {
 //--------------------------------------RUTAS----------------------------------------
 public static final String QUEUE_NUEVA_PUBLICACION = "nueva_publicacion";
 
-    public static final String RUTA_ARCHIVO_CLIENTES= "C:\\Users\\juanj\\Downloads\\LaboratorioColecciones\\LaboratorioColecciones\\src\\main\\resources\\co\\edu\\uniquindio\\laboratoriocolecciones\\persistencia\\clientesTxtt";
-    public static final String RUTA_ARCHIVO_PRODUCTOS ="C:\\Users\\juanj\\Downloads\\LaboratorioColecciones\\LaboratorioColecciones\\src\\main\\resources\\co\\edu\\uniquindio\\laboratoriocolecciones\\persistencia\\productoTxt";
+    public static final String RUTA_ARCHIVO_CLIENTES= "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
+    public static final String RUTA_ARCHIVO_PRODUCTOS ="LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/productoTxt";
 
     public static final String RUTA_ARCHIVO_VENTA="LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/ventaTxt";
     public static final String RUTA_ARCHIVO_DETALLE_VENTA="LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/detalleVentaTxt";
-    public static final String RUTA_ARCHIVO_CARRITO_COMPRA="C:\\Users\\juanj\\Downloads\\LaboratorioColecciones\\LaboratorioColecciones\\src\\main\\resources\\co\\edu\\uniquindio\\laboratoriocolecciones\\persistencia\\carritosCompra";
+    public static final String RUTA_ARCHIVO_CARRITO_COMPRA="LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/carritosCompras";
     /**
      * Guarda en un archivo de texto todos la información de las personas almacenadas en el ArrayList
      * @param
