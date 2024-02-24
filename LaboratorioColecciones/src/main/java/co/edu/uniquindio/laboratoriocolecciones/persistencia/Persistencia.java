@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 
 public class Persistencia {
@@ -152,20 +153,18 @@ public static final String QUEUE_NUEVA_PUBLICACION = "nueva_publicacion";
         }
         return detalleVentas;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public static HashSet<CarritoCompras> cargarCarritoCompras() throws FileNotFoundException, IOException
+    {
+        HashSet<CarritoCompras> listaCarritoCompras = new HashSet<CarritoCompras>();
+        ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_CLIENTES);
+        String linea="";
+        for (int i = 0; i < contenido.size(); i++)
+        {
+            linea = contenido.get(i);//juan,arias,125454,Armenia,uni1@,12454,125444
+            CarritoCompras carritoCompra = new CarritoCompras();
+            carritoCompra.setCodigo(linea.split("--")[0]);
+            listaCarritoCompras.add(carritoCompra);
+        }
+        return listaCarritoCompras;
+    }
 }
