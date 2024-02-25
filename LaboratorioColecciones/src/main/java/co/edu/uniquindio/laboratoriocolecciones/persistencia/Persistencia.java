@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 
 public class Persistencia {
@@ -24,7 +23,7 @@ public class Persistencia {
 //--------------------------------------RUTAS----------------------------------------
 public static final String QUEUE_NUEVA_PUBLICACION = "nueva_publicacion";
 
-    public static final String RUTA_ARCHIVO_CLIENTES= "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
+    public static final String RUTA_ARCHIVO_CLIENTES= "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
     public static final String RUTA_ARCHIVO_PRODUCTOS ="LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/productoTxt";
 
     public static final String RUTA_ARCHIVO_VENTA="LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/ventaTxt";
@@ -53,7 +52,7 @@ public static final String QUEUE_NUEVA_PUBLICACION = "nueva_publicacion";
         String contenido = "";
         for(Producto producto:listaProductos.values())
         {
-            contenido+= producto.getCodigo() +"--"+  producto.getNombre()+"--"+producto.getPrecio()+"--"+producto.getCantidad();
+            contenido+= producto.getCodigo() +"--"+  producto.getNombreProducto()+"--"+producto.getPrecio()+"--"+producto.getCantidad();
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
     }
@@ -64,7 +63,7 @@ public static final String QUEUE_NUEVA_PUBLICACION = "nueva_publicacion";
         String contenido = "";
         for(Producto producto:listaProductos)
         {
-            contenido+= producto.getCodigo() +"--"+  producto.getNombre()+"--"+producto.getPrecio()+"--"+producto.getCantidad();
+            contenido+= producto.getCodigo() +"--"+  producto.getNombreProducto()+"--"+producto.getPrecio()+"--"+producto.getCantidad();
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
     }
@@ -128,7 +127,7 @@ public static final String QUEUE_NUEVA_PUBLICACION = "nueva_publicacion";
             linea = contenido.get(i);//juan,arias,125454,Armenia,uni1@,12454,125444
             Producto producto = new Producto();
             producto.setCodigo(linea.split("--")[0]);
-            producto.setNombre(linea.split("--")[1]);
+            producto.setNombreProducto(linea.split("--")[1]);
             producto.setPrecio(Integer.valueOf(linea.split("--")[2]));
             producto.setCantidad(Integer.valueOf(linea.split("--")[3]));
             productos.put(producto.getCodigo(), producto);

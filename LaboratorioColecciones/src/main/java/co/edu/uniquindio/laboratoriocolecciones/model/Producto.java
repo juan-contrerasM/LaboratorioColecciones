@@ -12,7 +12,7 @@ public class Producto {
 
 
     private String codigo;
-    private String nombre;
+    private String nombreProducto;
     private Integer precio;
     private Integer cantidad;
 
