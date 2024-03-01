@@ -11,8 +11,8 @@ public class iniciarPrograma extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(iniciarPrograma.class.getResource("crud.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1110, 550);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load(), 1110, 555);
+        stage.setTitle("Ventas");
         stage.setScene(scene);
         stage.show();
     }

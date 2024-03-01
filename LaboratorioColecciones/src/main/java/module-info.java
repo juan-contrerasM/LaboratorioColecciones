@@ -10,5 +10,7 @@ module co.edu.uniquindio.laboratorioColecciones
 
     opens co.edu.uniquindio.laboratoriocolecciones.controllersView to javafx.fxml;
     exports co.edu.uniquindio.laboratoriocolecciones.controllersView;
+    opens co.edu.uniquindio.laboratoriocolecciones.model;
+    exports co.edu.uniquindio.laboratoriocolecciones.model;
 
 }

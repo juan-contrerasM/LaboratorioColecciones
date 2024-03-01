@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="1115.0" stylesheets="@../css/color.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.laboratoriocolecciones.controllersView.HelloControllerView">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="1115.0" stylesheets="@../css/color.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.laboratoriocolecciones.controllersView.crud1VentaController">
   <tabs>
     <Tab text="Untitled Tab 1">
       <content>
@@ -25,14 +25,14 @@
                      <font>
                         <Font size="15.0" />
                      </font></TextField>
-                  <ImageView fx:id="imgBuscador" fitHeight="29.0" fitWidth="35.0" layoutX="487.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgBuscador" fitHeight="29.0" fitWidth="35.0" layoutX="460.0" layoutY="16.0" onMouseClicked="#buscar" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../imagenes/imgBuscador.jpg" />
                      </image>
                   </ImageView>
-                  <Pane fx:id="paneMensajeBienvenida" cache="true" cacheHint="SCALE_AND_ROTATE" cacheShape="false" centerShape="false" depthTest="DISABLE" layoutX="31.0" layoutY="72.0" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="135.0" prefWidth="539.0" scaleShape="false" styleClass="paneMensajeBienvenida" stylesheets="@../css/color.css">
+                  <Pane fx:id="paneMensajeBienvenida" cache="true" cacheHint="SCALE_AND_ROTATE" cacheShape="false" centerShape="false" depthTest="DISABLE" layoutX="31.0" layoutY="72.0" maxWidth="1.7976931348623157E308" mouseTransparent="true" prefHeight="135.0" prefWidth="465.0" scaleShape="false" styleClass="paneMensajeBienvenida" stylesheets="@../css/color.css">
                      <children>
-                        <ImageView fx:id="imgUsuario" fitHeight="95.0" fitWidth="102.0" layoutX="372.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" styleClass="pane-info-cliente">
+                        <ImageView fx:id="imgUsuario" fitHeight="95.0" fitWidth="102.0" layoutX="334.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" styleClass="pane-info-cliente">
                            <image>
                               <Image url="@../imagenes/OIP.jpg" />
                            </image>
@@ -47,81 +47,99 @@
                            </font></Text>
                      </children>
                   </Pane>
-                  <Line endX="-100.0" endY="299.0" layoutX="715.0" layoutY="151.0" startX="-100.0" startY="-92.0" stroke="#a113cd" />
-                  <Pane fx:id="paneInfoVenta" layoutX="30.0" layoutY="235.0" prefHeight="100.0" prefWidth="417.0">
+                  <Line endX="-100.0" endY="299.0" layoutX="616.0" layoutY="152.0" startX="-100.0" startY="-92.0" stroke="#a113cd" />
+                  <Pane fx:id="paneInfoVenta" layoutX="30.0" layoutY="222.0" prefHeight="113.0" prefWidth="471.0">
                      <children>
-                        <TextField fx:id="txtCodigo" layoutX="21.0" layoutY="41.0" prefHeight="27.0" prefWidth="155.0" promptText="Codigo">
+                        <TextField fx:id="txtCodigo" layoutX="21.0" layoutY="45.0" prefHeight="27.0" prefWidth="155.0" promptText="Codigo">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></TextField>
                         <DatePicker fx:id="dateVenta" layoutX="199.0" layoutY="50.0" promptText="Fecha de la venta " />
-                        <Text fx:id="txtInformativo" fill="#731f97" layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion Venta:" wrappingWidth="184.9814453125">
-                           <font>
-                              <Font name="System Bold Italic" size="20.0" />
-                           </font>
-                        </Text>
+                        <Pane fx:id="paneLabel" layoutX="12.0" layoutY="8.0" prefHeight="31.0" prefWidth="224.0">
+                           <children>
+                              <Text fx:id="txtInformativo" fill="#731f97" layoutX="21.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion Venta:" wrappingWidth="181.9814453125">
+                                 <font>
+                                    <Font name="System Bold Italic" size="20.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
-                  <Pane fx:id="paneInfoCliente" layoutX="32.0" layoutY="377.0" prefHeight="81.0" prefWidth="537.0">
+                  <Pane fx:id="paneInfoCliente" layoutX="32.0" layoutY="354.0" prefHeight="104.0" prefWidth="472.0">
                      <children>
-                        <TextField fx:id="txtIdentificacion" layoutX="181.0" layoutY="36.0" prefHeight="31.0" prefWidth="194.0" promptText="Identificacion">
+                        <TextField fx:id="txtIdentificacion" layoutX="210.0" layoutY="52.0" prefHeight="31.0" prefWidth="194.0" promptText="Identificacion">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></TextField>
-                        <Text fx:id="txtInformativo2" fill="#731f97" layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion Cliente:" wrappingWidth="194.9814453125">
-                           <font>
-                              <Font name="System Bold Italic" size="20.0" />
-                           </font>
-                        </Text>
+                        <Pane fx:id="panelabel2" layoutX="14.0" layoutY="6.0" prefHeight="39.0" prefWidth="240.0">
+                           <children>
+                              <Text fx:id="txtInformativo2" fill="#731f97" layoutX="31.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion Cliente:" wrappingWidth="194.9814453125">
+                                 <font>
+                                    <Font name="System Bold Italic" size="20.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
-                  <Pane fx:id="paneOpciones" layoutX="202.0" layoutY="479.0" prefHeight="65.0" prefWidth="799.0" />
-                  <Pane fx:id="paneDetalleVenta" layoutX="652.0" layoutY="58.0" prefHeight="129.0" prefWidth="443.0">
+                  <Pane fx:id="paneOpciones" layoutX="130.0" layoutY="467.0" prefHeight="65.0" prefWidth="848.0">
                      <children>
-                        <TextField fx:id="txtCantidad" layoutX="9.0" layoutY="58.0" prefHeight="31.0" prefWidth="200.0" promptText="Cantidad">
+                        <Button fx:id="btnAgregar" layoutX="301.0" layoutY="12.0" mnemonicParsing="false" onAction="#agregarVenta" prefHeight="39.0" prefWidth="185.0" text="Guardar Venta" />
+                     </children></Pane>
+                  <Pane fx:id="paneDetalleVenta" layoutX="538.0" layoutY="60.0" prefHeight="145.0" prefWidth="443.0">
+                     <children>
+                        <TextField fx:id="txtCantidad" layoutX="9.0" layoutY="54.0" prefHeight="31.0" prefWidth="200.0" promptText="Cantidad">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></TextField>
-                        <Text fx:id="txtInformativo" fill="#6c0f83" layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detalle De la Venta:" wrappingWidth="237.9814453125">
-                           <font>
-                              <Font name="System Bold Italic" size="20.0" />
-                           </font>
-                        </Text>
-                        <TextField fx:id="txtCodigoVenta" layoutX="232.0" layoutY="58.0" prefHeight="31.0" prefWidth="197.0" promptText="Codigo Venta">
+                        <TextField fx:id="txtSubTotal" layoutX="240.0" layoutY="54.0" prefHeight="31.0" prefWidth="197.0" promptText="SubTotal">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></TextField>
+                        <Pane fx:id="paneLabel3" layoutX="9.0" layoutY="8.0" prefHeight="40.0" prefWidth="296.0">
+                           <children>
+                              <Text fx:id="txtInformativo" fill="#6c0f83" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agregar Detalle De la Venta:" wrappingWidth="282.9814453125">
+                                 <font>
+                                    <Font name="System Bold Italic" size="20.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <TextField fx:id="txtCodigoDetalleVenta" layoutX="9.0" layoutY="100.0" prefHeight="31.0" prefWidth="200.0" promptText="Codigo Detalle Venta">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </TextField>
                      </children>
                   </Pane>
-                  <Pane fx:id="paneBotonesVenta" layoutX="464.0" layoutY="232.0" prefHeight="107.0" prefWidth="105.0">
+                  <Pane fx:id="paneBotonesVenta" layoutX="989.0" layoutY="69.0" prefHeight="131.0" prefWidth="103.0">
                      <children>
-                        <Button fx:id="btnAgregar" layoutX="20.0" layoutY="14.0" mnemonicParsing="false" text="Agregar" />
-                        <Button fx:id="btnAgregar1" layoutX="20.0" layoutY="54.0" mnemonicParsing="false" text="Agregar" />
+                        <Button fx:id="btnGuardarDetalleVenta" layoutX="12.0" layoutY="42.0" mnemonicParsing="false" onAction="#GuardarDetalleVenta" prefHeight="48.0" prefWidth="75.0" text="Agregar" />
                      </children>
                   </Pane>
-                  <Pane fx:id="paneBotonesInfoCliente" layoutX="464.0" layoutY="332.0" prefHeight="107.0" prefWidth="105.0" />
-                  <Pane fx:id="paneTable" layoutX="655.0" layoutY="217.0" prefHeight="239.0" prefWidth="441.0">
+                  <Pane fx:id="paneTable" layoutX="539.0" layoutY="209.0" prefHeight="251.0" prefWidth="555.0">
                      <children>
-                        <TableView fx:id="tableListado" layoutX="18.0" layoutY="40.0" prefHeight="185.0" prefWidth="406.0">
+                        <TableView fx:id="tableListado" layoutX="13.0" layoutY="47.0" prefHeight="190.0" prefWidth="526.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="columnCodigoVenta" prefWidth="261.0" text="Codigo Venta" />
+                              <TableColumn fx:id="columnCantidad" prefWidth="133.0" text="Cantidad" />
+                              <TableColumn fx:id="columSubTotal" prefWidth="133.0" text="SubTotal" />
                           </columns>
                         </TableView>
-                        <Text fx:id="txtInformativo3" fill="#6c0f83" layoutX="18.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tabla De Busqueda" wrappingWidth="186.9814453125">
-                           <font>
-                              <Font name="System Bold Italic" size="20.0" />
-                           </font>
-                        </Text>
+                        <Pane fx:id="paneLabel3" layoutX="25.0" layoutY="5.0" prefHeight="37.0" prefWidth="243.0">
+                           <children>
+                              <Text fx:id="txtInformativo3" fill="#6c0f83" layoutX="8.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Listado Detalle Venta" wrappingWidth="226.9814453125">
+                                 <font>
+                                    <Font name="System Bold Italic" size="20.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
-                  <Line endX="331.0" layoutX="756.0" layoutY="47.0" startX="-100.0" stroke="#a113cd" />
+                  <Line endX="331.0" layoutX="756.0" layoutY="47.0" startX="-198.0" stroke="#a113cd" />
                </children></AnchorPane>
-      </content>
-    </Tab>
-    <Tab text="Untitled Tab 2">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       </content>
     </Tab>
     

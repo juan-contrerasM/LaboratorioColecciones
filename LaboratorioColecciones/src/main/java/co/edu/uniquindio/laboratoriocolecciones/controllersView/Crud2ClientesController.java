@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class Crud2 {
+public class Crud2ClientesController {
 
     @FXML
     private Button btnAgregar;
@@ -58,8 +58,8 @@ public class Crud2 {
     void agregar_cliente(ActionEvent event) throws IOException {
         HashMap<String, Cliente> listaClientes=new HashMap<>();
         String nombre=txtNombre.getText();
-        String id=txtNombre.getText();
-        String direccion=txtNombre.getText();
+        String id=txt_numero_identificacion.getText();
+        String direccion=txt_direccion.getText();
 
         Cliente cliente= new Cliente(id,nombre,direccion);
         listaClientes.put(cliente.getNumeroId(), cliente);

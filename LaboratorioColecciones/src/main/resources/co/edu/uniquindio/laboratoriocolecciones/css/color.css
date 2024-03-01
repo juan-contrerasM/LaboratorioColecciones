@@ -11,8 +11,9 @@
     font-size: 40px; /* Tamaño de fuente más grande */
 }
 
-#paneInfoVenta,#paneBotonesDetalleVenta,#paneBotonesVenta,#paneDetalleVenta,#paneInfoCliente,#paneOpciones,#paneTable{
+#paneInfoVenta,#paneBotonesLsitado,#paneBotonesDetalleVenta,#paneBotonesVenta,#paneDetalleVenta,#paneInfoCliente,#paneOpciones,#paneTable{
     -fx-border-radius: 15;
+    -fx-background-color: #EAEAEAFF;
     -fx-border-color: linear-gradient( to left, #ff69b4, #8e44ad);
     -fx-border-width: 2px;
 }
@@ -61,4 +62,32 @@
 -fx-padding: 10;
 
 }
+.label{
+
+    -fx-background-radius:30 ;
+    -fx-border-radius:30;
+    -fx-padding: 10;
+}
+.text-field{
+    -fx-background-color: white;
+}
+.button{
+    -fx-background-radius:30 ;
+    -fx-border-color: linear-gradient( to left, #ff69b4, #8e44ad);
+    -fx-border-radius:30;
+    -fx-padding: 10;
+
+}
+.button:hover{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+    -fx-scale-x: 1.1; /* Escala el botón al 110% del tamaño original en el eje x */
+    -fx-scale-y: 1.1; /* Escala el botón al 110% del tamaño original en el eje y */
+}
+#paneLabel,#panelabel2,#paneLabel3{
+    -fx-background-color: white;
+    -fx-background-radius:30 ;
+    -fx-border-radius:30;
+}
+
 
