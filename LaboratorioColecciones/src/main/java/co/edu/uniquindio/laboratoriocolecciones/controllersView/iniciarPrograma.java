@@ -1,5 +1,6 @@
 package co.edu.uniquindio.laboratoriocolecciones.controllersView;
 
+import co.edu.uniquindio.laboratoriocolecciones.persistencia.GestorProductos;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ public class iniciarPrograma extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        GestorProductos.inicializarProductos(); // Añade esta línea para inicializar los productos
+        launch(args);
     }
 }

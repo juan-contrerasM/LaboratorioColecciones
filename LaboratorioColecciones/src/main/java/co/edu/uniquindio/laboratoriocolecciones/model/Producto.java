@@ -8,14 +8,12 @@ import lombok.*;
 @NoArgsConstructor//constructor vacio
 @ToString// el to string
 @Builder // es aquel que nos permite acceder a estos metodos lombok
+
 public class Producto {
-
-
     private String codigo;
     private String nombreProducto;
-    private Integer precio;
-    private Integer cantidad;
-
-
+    private double precio;
+    private int cantidad;
 
 }
+

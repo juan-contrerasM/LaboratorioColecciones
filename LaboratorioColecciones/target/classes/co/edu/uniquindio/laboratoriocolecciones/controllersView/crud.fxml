@@ -17,11 +17,11 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="1115.0" stylesheets="@../css/color.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.laboratoriocolecciones.controllersView.crud1VentaController">
   <tabs>
-    <Tab text="Untitled Tab 1">
+    <Tab text="Ventas">
       <content>
         <AnchorPane fx:id="panePrincipal" minHeight="0.0" minWidth="0.0" prefHeight="525.0" prefWidth="1076.0" stylesheets="@../css/color.css">
                <children>
-                  <TextField fx:id="txtBuscador" alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="33.0" prefWidth="433.0" promptText="Buscador" stylesheets="@../css/color.css">
+                  <TextField fx:id="txtBuscador" alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="33.0" prefWidth="433.0" promptText="Buscador Detalles Ventas" stylesheets="@../css/color.css">
                      <font>
                         <Font size="15.0" />
                      </font></TextField>
@@ -142,10 +142,16 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    
-    <Tab fx:id="tabAñadirProducto" text="tab2w">
-      <fx:include source="crud2.fxml" />
+     <Tab fx:id="tabAñadirProducto" text="Clientes">
+        <content>
+           <fx:include source="crud2.fxml" />
+        </content>
+     </Tab>
 
+     <Tab fx:id="tabCarritoCompras" text="Carrito De Compras">
+        <content>
+           <fx:include source="crud3.fxml" />
+        </content>
    </Tab>
   </tabs>
 </TabPane>

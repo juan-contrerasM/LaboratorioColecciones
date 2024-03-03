@@ -9,9 +9,11 @@ import co.edu.uniquindio.laboratoriocolecciones.model.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+
+import static co.edu.uniquindio.laboratoriocolecciones.persistencia.GestorProductos.obtenerProductoPorCodigo;
 
 
 public class Persistencia {
@@ -20,11 +22,11 @@ public class Persistencia {
     //--------------------------------------RUTAS----------------------------------------
     public static final String QUEUE_NUEVA_PUBLICACION = "nueva_publicacion";
 
-    public static final String RUTA_ARCHIVO_CLIENTES = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
+    public static final String RUTA_ARCHIVO_CLIENTES = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
     public static final String RUTA_ARCHIVO_PRODUCTOS = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/productoTxt";
 
     public static final String RUTA_ARCHIVO_VENTA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/ventaTxt";
-    public static final String RUTA_ARCHIVO_DETALLE_VENTA = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/detalleVentaTxt";
+    public static final String RUTA_ARCHIVO_DETALLE_VENTA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/detalleVentaTxt";
     public static final String RUTA_ARCHIVO_CARRITO_COMPRA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/carritosCompras";
 
     /**
@@ -65,14 +67,15 @@ public class Persistencia {
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_DETALLE_VENTA, contenido, false);
     }
 
-    public static void guardarCarritoCompras(HashSet<CarritoCompras> listaCarritoCompras) throws IOException {
-        // TODO Auto-generated method stub
+    public static void guardarCarritoCompras(CarritoCompras carritoDeCompras) throws IOException {
         String contenido = "";
-        for (CarritoCompras carritoCompras : listaCarritoCompras) {
-            contenido += carritoCompras.getCodigo();
+        for (Map.Entry<String, Producto> entry : carritoDeCompras.getProductos().entrySet()) {
+            // Asumiendo que cada producto en el HashMap también tiene una cantidad
+            contenido += entry.getKey() + "," + entry.getValue().getCantidad() + "\n"; // Separador ',' entre código y cantidad, '\n' para nueva línea
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
     }
+
 
 
 
@@ -102,18 +105,23 @@ public class Persistencia {
         return clientes;
     }
 
-    public static HashMap<String, Producto> cargarProductos() throws FileNotFoundException, IOException {
+    public static HashMap<String, Producto> cargarProductos() {
         HashMap<String, Producto> productos = new HashMap<>();
-        ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_PRODUCTOS);
-        String linea = "";
-        for (int i = 0; i < contenido.size(); i++) {
-            linea = contenido.get(i);//juan,arias,125454,Armenia,uni1@,12454,125444
-            Producto producto = new Producto();
-            producto.setCodigo(linea.split("--")[0]);
-            producto.setNombreProducto(linea.split("--")[1]);
-            producto.setPrecio(Integer.valueOf(linea.split("--")[2]));
-            producto.setCantidad(Integer.valueOf(linea.split("--")[3]));
-            productos.put(producto.getCodigo(), producto);
+        try {
+            List<String> lineas = Files.readAllLines(Paths.get(RUTA_ARCHIVO_PRODUCTOS));
+            for (String linea : lineas) {
+                String[] partes = linea.split(",");
+                if (partes.length == 4) {
+                    String codigo = partes[0];
+                    String nombreProducto = partes[1];
+                    double precio = Double.parseDouble(partes[2]);
+                    int cantidad = Integer.parseInt(partes[3]);
+                    Producto producto = new Producto(codigo, nombreProducto, precio, cantidad);
+                    productos.put(codigo, producto);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return productos;
     }
@@ -134,16 +142,21 @@ public class Persistencia {
         return detalleVentas;
     }
 
-    public static HashSet<CarritoCompras> cargarCarritoCompras() throws FileNotFoundException, IOException {
-        HashSet<CarritoCompras> listaCarritoCompras = new HashSet<CarritoCompras>();
-        ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_CLIENTES);
-        String linea = "";
-        for (int i = 0; i < contenido.size(); i++) {
-            linea = contenido.get(i);//juan,arias,125454,Armenia,uni1@,12454,125444
-            CarritoCompras carritoCompra = new CarritoCompras();
-            carritoCompra.setCodigo(linea.split("--")[0]);
-            listaCarritoCompras.add(carritoCompra);
+    public static CarritoCompras cargarCarritoCompras() throws FileNotFoundException, IOException {
+        CarritoCompras carritoDeCompras = new CarritoCompras();
+        ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_PRODUCTOS);
+        for (String linea : contenido) {
+            String[] partes = linea.split(","); // Asumiendo que cada línea tiene el formato "código,cantidad"
+            if (partes.length == 2) {
+                String codigo = partes[0];
+                int cantidad = Integer.parseInt(partes[1]);
+                // Asumiendo que tienes una manera de obtener un producto por su código
+                Producto producto = obtenerProductoPorCodigo(codigo);
+                if (producto != null) {
+                    carritoDeCompras.agregarProducto(producto, cantidad);
+                }
+            }
         }
-        return listaCarritoCompras;
+        return carritoDeCompras;
     }
 }

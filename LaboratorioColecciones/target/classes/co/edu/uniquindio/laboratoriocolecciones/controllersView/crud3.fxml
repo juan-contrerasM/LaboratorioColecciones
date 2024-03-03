@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="co.edu.uniquindio.laboratoriocolecciones.controllersView.Crud3CarritodeCompras"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <!-- Campo de texto para ingresar el código del producto -->
+    <TextField fx:id="codigoProducto"
+               promptText="Código del Producto"
+               AnchorPane.leftAnchor="10.0"
+               AnchorPane.topAnchor="10.0"
+               AnchorPane.rightAnchor="10.0"/>
+
+    <!-- Botón para agregar un producto por su código -->
+    <Button text="Agregar Producto por Código"
+            onAction="#agregarProductoPorCodigo"
+            AnchorPane.leftAnchor="10.0"
+            AnchorPane.topAnchor="50.0"
+            AnchorPane.rightAnchor="10.0"/>
+
+    <!-- Lista para mostrar los productos agregados -->
+    <ListView fx:id="listaProductos"
+              AnchorPane.leftAnchor="10.0"
+              AnchorPane.topAnchor="90.0"
+              AnchorPane.rightAnchor="10.0"
+              AnchorPane.bottomAnchor="50.0"/>
+
+    <!-- Botón para eliminar el producto seleccionado de la lista -->
+    <Button text="Eliminar Producto Seleccionado"
+            onAction="#eliminarProductoSeleccionado"
+            AnchorPane.leftAnchor="10.0"
+            AnchorPane.bottomAnchor="10.0"
+            AnchorPane.rightAnchor="10.0"/>
+
+</AnchorPane>
+
