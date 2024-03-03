@@ -1,15 +1,12 @@
 package co.edu.uniquindio.laboratoriocolecciones.controllersView;
 
+import co.edu.uniquindio.laboratoriocolecciones.model.Producto;
+import co.edu.uniquindio.laboratoriocolecciones.persistencia.Persistencia;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
 
-import static co.edu.uniquindio.laboratoriocolecciones.persistencia.Persistencia.RUTA_ARCHIVO_PRODUCTOS;
 
 public class Crud4Productos {
 
@@ -23,46 +20,33 @@ public class Crud4Productos {
     private TextField txtCantidad;
 
     @FXML
-    protected void guardarProducto() {
-        if (validarDatos()) {
-            String codigo = txtCodigo.getText();
-            String nombreProducto = txtNombreProducto.getText();
-            String precio = txtPrecio.getText();
-            String cantidad = txtCantidad.getText();
+    void guardarProducto(javafx.event.ActionEvent actionEvent) throws IOException {
+        // Crea un nuevo HashMap para almacenar el producto que se va a agregar
+        HashMap<String, Producto> listaProductos = new HashMap<>();
 
-            String lineaProducto = String.format("%s,%s,%s,%s%n", codigo, nombreProducto, precio, cantidad);
+        // Obtiene los datos del producto desde los campos de texto
+        String codigo = txtCodigo.getText();
+        String nombreProducto = txtNombreProducto.getText();
+        double precio = Double.parseDouble(txtPrecio.getText()); // Asegúrate de manejar NumberFormatException
+        int cantidad = Integer.parseInt(txtCantidad.getText()); // Asegúrate de manejar NumberFormatException
 
-            try {
-                Path path = Paths.get(RUTA_ARCHIVO_PRODUCTOS);
-                Files.write(path, lineaProducto.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-                limpiarCampos();
+        // Crea un nuevo objeto Producto
+        Producto producto = new Producto(codigo, nombreProducto, precio, cantidad);
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Confirmación");
-                alert.setHeaderText(null);
-                alert.setContentText("El producto ha sido guardado correctamente.");
-                alert.showAndWait();
-            } catch (IOException e) {
-                e.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error al guardar el producto");
-                alert.setContentText("Ocurrió un error al intentar guardar el producto. Por favor, inténtelo de nuevo.");
-                alert.showAndWait();
-            }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Datos inválidos");
-            alert.setHeaderText(null);
-            alert.setContentText("Los datos ingresados no son válidos. Por favor, verifique la información proporcionada.");
-            alert.showAndWait();
+        // Agrega el producto al HashMap
+        listaProductos.put(producto.getCodigo(), producto);
+
+        // Guarda el HashMap de productos utilizando el método en Persistencia
+        Persistencia.guardarProductos(listaProductos);
+
+        // Opcional: Cargar y mostrar todos los productos para confirmación
+        HashMap<String, Producto> productosCargados = Persistencia.cargarProductos();
+        for (Producto productoCargado : productosCargados.values()) {
+            System.out.println(productoCargado.toString()); // Asegúrate de tener implementado el método toString en la clase Producto
         }
-    }
-    private boolean validarDatos() {
-        return !txtCodigo.getText().isEmpty() &&
-                !txtNombreProducto.getText().isEmpty() &&
-                !txtPrecio.getText().isEmpty() &&
-                !txtCantidad.getText().isEmpty();
+
+        // Limpia los campos después de guardar el producto
+        limpiarCampos();
     }
     private void limpiarCampos() {
         // Limpia los campos después de guardar un producto

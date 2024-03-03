@@ -46,7 +46,7 @@ public class Persistencia {
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_CLIENTES, contenido, false);
     }
 
-    //productoss
+    //productos
     public static void guardarProductos(HashMap<String, Producto> listaProductos) throws IOException {
         String contenido = "";
         for (Producto producto : listaProductos.values()) {
