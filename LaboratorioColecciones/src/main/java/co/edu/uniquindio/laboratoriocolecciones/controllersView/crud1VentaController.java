@@ -206,10 +206,14 @@ public class crud1VentaController implements Initializable {
 
     }
 
-
+private ArrayList<Cliente>clientes = new ArrayList<>();
 
     public Cliente buscarCliente() throws IOException {
-        listaClienbtes = Persistencia.cargarClientes();
+        clientes.addAll(Persistencia.cargarClientes());
+       String id= clientes.get(0).getNumeroId();
+        listaClienbtes.put(id ,clientes.get(0));
+
+        //listaClienbtes = Persistencia.cargarClientes();
         Persistencia.guardarClientes(listaClienbtes);
         return listaClienbtes.get(txtIdentificacion.getText());
     }

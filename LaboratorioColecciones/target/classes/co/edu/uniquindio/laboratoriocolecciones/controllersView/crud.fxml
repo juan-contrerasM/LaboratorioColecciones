@@ -21,7 +21,7 @@
       <content>
         <AnchorPane fx:id="panePrincipal" minHeight="0.0" minWidth="0.0" prefHeight="525.0" prefWidth="1076.0" stylesheets="@../css/color.css">
                <children>
-                  <TextField fx:id="txtBuscador" alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="33.0" prefWidth="433.0" promptText="Buscador" stylesheets="@../css/color.css">
+                  <TextField fx:id="txtBuscador" alignment="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="33.0" prefWidth="433.0" promptText="Buscador Detalles Ventas" stylesheets="@../css/color.css">
                      <font>
                         <Font size="15.0" />
                      </font></TextField>
