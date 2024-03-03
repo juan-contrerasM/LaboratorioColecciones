@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.*;
 
 import static co.edu.uniquindio.laboratoriocolecciones.persistencia.GestorProductos.obtenerProductoPorCodigo;
@@ -20,15 +21,13 @@ public class Persistencia {
 
 
     //--------------------------------------RUTAS----------------------------------------
-    public static final String QUEUE_NUEVA_PUBLICACION = "nueva_publicacion";
 
-    public static final String RUTA_ARCHIVO_CLIENTES = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
-    public static final String RUTA_ARCHIVO_PRODUCTOS = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/productoTxt";
+    public static final String RUTA_ARCHIVO_CLIENTES = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
+    public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/productoTxt";
 
-    public static final String RUTA_ARCHIVO_VENTA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/ventaTxt";
-    public static final String RUTA_ARCHIVO_DETALLE_VENTA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/detalleVentaTxt";
-    public static final String RUTA_ARCHIVO_CARRITO_COMPRA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/carritosCompras";
-
+    public static final String RUTA_ARCHIVO_VENTA = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/ventaTxt";
+    public static final String RUTA_ARCHIVO_DETALLE_VENTA = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/detalleVentaTxt";
+    public static final String RUTA_ARCHIVO_CARRITO_COMPRA = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/carritosCompra";
     /**
      * Guarda en un archivo de texto todos la información de las personas almacenadas en el ArrayList
      *
@@ -77,7 +76,15 @@ public class Persistencia {
     }
 
 
-
+    public static void guardarVenta(ArrayList<Venta> ventas) throws IOException {
+        // TODO Auto-generated method stub
+        String contenido = "";
+        for (Venta venta : ventas) {
+            contenido += venta.getCodigoVenta()+ "--" + venta.getFechaVenta() + "--" + venta.getCliente().getNombre()+"--"+venta.getCliente().getNumeroId()+"--"+venta.getCliente().getDireccion()+"--"+venta.getDetalleVenta().getCodigoDetaleVenta()
+            +"--"+venta.getDetalleVenta().getSubtotal()+"--"+venta.getDetalleVenta().getCantidad()+"\n";
+        }
+        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_VENTA, contenido, false);
+    }
 
 //	--------------------------------------------CARGAR ARCHIVOS----------------------------------------------------------
 
@@ -158,5 +165,36 @@ public class Persistencia {
             }
         }
         return carritoDeCompras;
+    }
+
+    /**
+     * venta.getCodigoVenta()+ "--" + venta.getFechaVenta() + "--" + venta.getCliente().getNombre()+"--"+venta.getCliente().getNumeroId()+"--"+venta.getCliente().getDireccion()+"--"+venta.getDetalleVenta().getCodigoDetaleVenta()
+     *             +"--"+venta.getDetalleVenta().getSubtotal()+"--"+venta.getDetalleVenta().getCantidad()+"\n";
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public static ArrayList<Venta> cargarVenta() throws FileNotFoundException, IOException {
+        ArrayList<Venta> ventas = new ArrayList<>();
+        ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_VENTA);
+        String linea = "";
+        for (int i = 0; i < contenido.size(); i++) {
+            linea = contenido.get(i);//juan,arias,125454,Armenia,uni1@,12454,125444
+            Venta venta = new Venta();
+            Cliente cliente=new Cliente();
+            DetalleVenta detalleVenta=new DetalleVenta();
+            venta.setCodigoVenta(linea.split("--")[0]);
+            venta.setFechaVenta(LocalDate.parse(linea.split("--")[1]));
+            cliente.setNombre(linea.split("--")[2]);
+            cliente.setNumeroId(linea.split("--")[3]);
+            cliente.setDireccion(linea.split("")[4]);
+            detalleVenta.setCodigoDetaleVenta(linea.split("--")[5]);
+            detalleVenta.setSubtotal(linea.split("--")[6]);
+            detalleVenta.setCantidad(Integer.valueOf(linea.split("--")[7]));
+            venta.setCliente(cliente);
+            venta.setDetalleVenta(detalleVenta);
+            ventas.add(venta);
+        }
+        return ventas;
     }
 }

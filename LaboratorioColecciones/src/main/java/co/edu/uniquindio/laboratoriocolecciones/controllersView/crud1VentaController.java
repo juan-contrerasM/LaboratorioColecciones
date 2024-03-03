@@ -33,7 +33,6 @@ public class crud1VentaController implements Initializable {
 
     @FXML
     private Button btnGuardarDetalleVenta;
-
     @FXML
     private DatePicker dateVenta;
 
@@ -55,6 +54,8 @@ public class crud1VentaController implements Initializable {
     @FXML
     private Pane paneInfoVenta;
 
+    @FXML
+    private Button btnGuardarDetalleVenta1;
     @FXML
     private Pane paneLabel;
 
@@ -80,15 +81,8 @@ public class crud1VentaController implements Initializable {
     private Tab tabAñadirProducto;
 
     @FXML
-    private TableColumn<DetalleVenta, String> columnCantidad;
+    private Tab tabCarritoCompras;
 
-    @FXML
-    private TableColumn<DetalleVenta, Integer> columnCodigoVenta;
-    @FXML
-    private TableColumn<DetalleVenta, String> columSubTotal;
-
-    @FXML
-    private TableView<DetalleVenta> tableListado;
 
     @FXML
     private TextField txtBuscador;
@@ -100,7 +94,7 @@ public class crud1VentaController implements Initializable {
     private TextField txtCodigo;
 
     @FXML
-    private TextField txtSubTotal;
+    private TextField txtCodigoDetalleVenta;
 
     @FXML
     private TextField txtIdentificacion;
@@ -121,7 +115,19 @@ public class crud1VentaController implements Initializable {
     private Text txtInformativo3;
 
     @FXML
-    private TextField txtCodigoDetalleVenta;
+    private TextField txtSubTotal;
+
+    @FXML
+    private TableColumn<DetalleVenta, String> columnCantidad;
+
+    @FXML
+    private TableColumn<DetalleVenta, Integer> columnCodigoVenta;
+    @FXML
+    private TableColumn<DetalleVenta, String> columSubTotal;
+
+    @FXML
+    private TableView<DetalleVenta> tableListado;
+
 
     //----------------------------------------------------------
 
@@ -137,7 +143,7 @@ public class crud1VentaController implements Initializable {
         //mostrar en tabla y guardar en archivos txt
         if (validarCamposGudarDetalleVenta()) {
 
-            DetalleVenta detalleVenta= new DetalleVenta();
+            DetalleVenta detalleVenta = new DetalleVenta();
             // se setean la info de la interfaz en el objeto
             detalleVenta.setSubtotal(txtSubTotal.getText());
             detalleVenta.setCantidad(Integer.valueOf(txtCantidad.getText()));
@@ -147,14 +153,14 @@ public class crud1VentaController implements Initializable {
             detalleVentaList = Persistencia.cargarDetalleVenta();
 
             //se verifica que el detalle venta no este contenido en la lista
-            if (detalleVentaList.contains(detalleVenta)) {
+            if (existeDetalleVenta()) {
                 mostrarMensaje("Registro Detalle", "Registro Detalle Venta erroneo", "El codigo de Detalle Venta ya fue registrado, cambie el codigo", Alert.AlertType.ERROR);
 
             } else {
                 detalleVentaList.add(detalleVenta);
                 mostrarMensaje("Se guardo Detalle", "Se ha guardado correctamente ", "S eha gusrado correctamente el detalle de la venta", Alert.AlertType.INFORMATION);
                 tableListado.setItems(FXCollections.observableArrayList(detalleVentaList));
-
+                limpiarCamposDetalle();
             }
             Persistencia.guardarDetalleVenta(detalleVentaList);
 
@@ -166,7 +172,9 @@ public class crud1VentaController implements Initializable {
     void agregarVenta(ActionEvent event) throws IOException {
         //guardar los dtaos en su totalidad
         if (validarCamposGuardarVenta()) {
-            Venta venta=new Venta();
+            Venta venta = new Venta();
+            ventaList = Persistencia.cargarVenta();
+
             venta.setCodigoVenta(txtCodigo.getText());
             venta.setFechaVenta(dateVenta.getValue());
             if (buscarCliente() == null) {
@@ -177,11 +185,13 @@ public class crud1VentaController implements Initializable {
                     mostrarMensaje("Error busqueda", "registrar un detalle venta", "debe registrar un detalle venta con este codigo", Alert.AlertType.INFORMATION);
                 } else {
                     venta.setDetalleVenta(buscarDetalleVenta());
-                    if (ventaList.contains(venta)) {
+                    if (buscarVenta()) {
                         mostrarMensaje("Error al guardar venta", "Codigo de venta ya utilizaedo", "Ya ha sido  registrada una venta con este codigo", Alert.AlertType.ERROR);
                     } else {
                         ventaList.add(venta);
                         mostrarMensaje("Se guardo la venta", "Venta guardada con exito", "La venta ha sido guarda", Alert.AlertType.INFORMATION);
+                        limpiarCamposVenta();
+                        Persistencia.guardarVenta(ventaList);
                     }
                 }
             }
@@ -193,11 +203,12 @@ public class crud1VentaController implements Initializable {
 
 
     }
+
     @FXML
     void buscar(MouseEvent event) {
-        List<DetalleVenta>AUXILIAR=new ArrayList<>();
-        for (DetalleVenta detalleVenta:detalleVentaList) {
-            if(detalleVenta.getCodigoDetaleVenta().equals(txtBuscador.getText())){
+        List<DetalleVenta> AUXILIAR = new ArrayList<>();
+        for (DetalleVenta detalleVenta : detalleVentaList) {
+            if (detalleVenta.getCodigoDetaleVenta().equals(txtBuscador.getText())) {
                 AUXILIAR.add(detalleVenta);
                 break;
             }
@@ -207,15 +218,21 @@ public class crud1VentaController implements Initializable {
     }
 
 
-
     public Cliente buscarCliente() throws IOException {
         listaClienbtes = Persistencia.cargarClientes();
         Persistencia.guardarClientes(listaClienbtes);
         return listaClienbtes.get(txtIdentificacion.getText());
     }
+    public boolean existeDetalleVenta(){
+        boolean existeDetalle = detalleVentaList.stream()
+                .anyMatch(detalleVenta -> detalleVenta.getCodigoDetaleVenta().equals(txtCodigoDetalleVenta.getText()));
+        return existeDetalle;// Ahora 'existeVenta' contiene true si hay una venta con el código especificado, de lo contrario, contiene false
+
+
+    }
 
     public DetalleVenta buscarDetalleVenta() throws IOException {
-        detalleVentaList=Persistencia.cargarDetalleVenta();
+        detalleVentaList = Persistencia.cargarDetalleVenta();
         Persistencia.guardarDetalleVenta(detalleVentaList);
         for (DetalleVenta detalleVenta1 : detalleVentaList) {
             if (detalleVenta1.getCodigoDetaleVenta().equals(txtBuscador.getText())) {
@@ -225,11 +242,17 @@ public class crud1VentaController implements Initializable {
         return null;
     }
 
+    public boolean buscarVenta() {
+        boolean existeVenta = ventaList.stream()
+                .anyMatch(venta1 -> venta1.getCodigoVenta().equals(txtCodigo.getText()));
+        return existeVenta;// Ahora 'existeVenta' contiene true si hay una venta con el código especificado, de lo contrario, contiene false
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            detalleVentaList=Persistencia.cargarDetalleVenta();
+            detalleVentaList = Persistencia.cargarDetalleVenta();
             columnCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
             columnCodigoVenta.setCellValueFactory(new PropertyValueFactory<>("codigoDetaleVenta"));
             columSubTotal.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
@@ -303,12 +326,20 @@ public class crud1VentaController implements Initializable {
         txtSubTotal.setText("");
         txtCodigoDetalleVenta.setText("");
         txtIdentificacion.setText("");
+        dateVenta.setValue(null);
     }
-    private void limpiarCamposDetalle() {
 
+    private void limpiarCamposDetalle() {
         txtCantidad.setText("");
         txtCodigoDetalleVenta.setText("");
         txtSubTotal.setText("");
+
+    }
+
+    @FXML
+    void refrescarTabla(ActionEvent event) throws IOException {
+        detalleVentaList = Persistencia.cargarDetalleVenta();
+        tableListado.setItems(FXCollections.observableArrayList(detalleVentaList));
 
     }
 

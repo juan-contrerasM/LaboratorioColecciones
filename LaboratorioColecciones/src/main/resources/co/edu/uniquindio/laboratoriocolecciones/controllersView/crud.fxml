@@ -25,7 +25,7 @@
                      <font>
                         <Font size="15.0" />
                      </font></TextField>
-                  <ImageView fx:id="imgBuscador" fitHeight="29.0" fitWidth="35.0" layoutX="460.0" layoutY="16.0" onMouseClicked="#buscar" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgBuscador" fitHeight="29.0" fitWidth="35.0" layoutX="467.0" layoutY="16.0" onMouseClicked="#buscar" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../imagenes/imgBuscador.jpg" />
                      </image>
@@ -57,7 +57,7 @@
                         <DatePicker fx:id="dateVenta" layoutX="199.0" layoutY="50.0" promptText="Fecha de la venta " />
                         <Pane fx:id="paneLabel" layoutX="12.0" layoutY="8.0" prefHeight="31.0" prefWidth="224.0">
                            <children>
-                              <Text fx:id="txtInformativo" fill="#731f97" layoutX="21.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion Venta:" wrappingWidth="181.9814453125">
+                              <Text fill="#731f97" layoutX="21.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion Venta:" wrappingWidth="181.9814453125">
                                  <font>
                                     <Font name="System Bold Italic" size="20.0" />
                                  </font>
@@ -97,7 +97,7 @@
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></TextField>
-                        <Pane fx:id="paneLabel3" layoutX="9.0" layoutY="8.0" prefHeight="40.0" prefWidth="296.0">
+                        <Pane layoutX="9.0" layoutY="8.0" prefHeight="40.0" prefWidth="296.0">
                            <children>
                               <Text fx:id="txtInformativo" fill="#6c0f83" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agregar Detalle De la Venta:" wrappingWidth="282.9814453125">
                                  <font>
@@ -136,6 +136,7 @@
                               </Text>
                            </children>
                         </Pane>
+                        <Button fx:id="btnGuardarDetalleVenta1" layoutX="408.0" layoutY="3.0" mnemonicParsing="false" onAction="#refrescarTabla" prefHeight="6.0" prefWidth="133.0" text="Refrescar" />
                      </children>
                   </Pane>
                   <Line endX="331.0" layoutX="756.0" layoutY="47.0" startX="-198.0" stroke="#a113cd" />
