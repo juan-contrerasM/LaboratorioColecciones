@@ -143,7 +143,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-     <Tab fx:id="tabAñadirProducto" text="Clientes">
+     <Tab fx:id="tabClientes" text="Clientes">
         <content>
            <fx:include source="crud2.fxml" />
         </content>
@@ -153,6 +153,12 @@
         <content>
            <fx:include source="crud3.fxml" />
         </content>
-   </Tab>
+     </Tab>
+
+     <Tab fx:id="tabProductos" text="Productos">
+        <content>
+           <fx:include source="crud4.fxml" />
+        </content>
+     </Tab>
   </tabs>
 </TabPane>

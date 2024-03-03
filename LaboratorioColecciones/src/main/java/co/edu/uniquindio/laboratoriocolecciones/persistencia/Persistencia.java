@@ -22,12 +22,12 @@ public class Persistencia {
 
     //--------------------------------------RUTAS----------------------------------------
 
-    public static final String RUTA_ARCHIVO_CLIENTES = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
-    public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/productoTxt";
+    public static final String RUTA_ARCHIVO_CLIENTES = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
+    public static final String RUTA_ARCHIVO_PRODUCTOS = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/productoTxt";
 
-    public static final String RUTA_ARCHIVO_VENTA = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/ventaTxt";
-    public static final String RUTA_ARCHIVO_DETALLE_VENTA = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/detalleVentaTxt";
-    public static final String RUTA_ARCHIVO_CARRITO_COMPRA = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/carritosCompra";
+    public static final String RUTA_ARCHIVO_VENTA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/ventaTxt";
+    public static final String RUTA_ARCHIVO_DETALLE_VENTA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/detalleVentaTxt";
+    public static final String RUTA_ARCHIVO_CARRITO_COMPRA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/carritosCompra";
     /**
      * Guarda en un archivo de texto todos la información de las personas almacenadas en el ArrayList
      *
@@ -47,14 +47,14 @@ public class Persistencia {
     }
 
     //productoss
-    public static void guardarProdcutos(HashMap<String, Producto> listaProductos) throws IOException {
-        // TODO Auto-generated method stub
+    public static void guardarProductos(HashMap<String, Producto> listaProductos) throws IOException {
         String contenido = "";
         for (Producto producto : listaProductos.values()) {
-            contenido += producto.getCodigo() + "--" + producto.getNombreProducto() + "--" + producto.getPrecio() + "--" + producto.getCantidad();
+            contenido += producto.getCodigo() + "," + producto.getNombreProducto() + "," + producto.getPrecio() + "," + producto.getCantidad() + "\n"; // Usar comas como separador
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
     }
+
 
     //detalle venta
     public static void guardarDetalleVenta(ArrayList<DetalleVenta> detalleVentas) throws IOException {

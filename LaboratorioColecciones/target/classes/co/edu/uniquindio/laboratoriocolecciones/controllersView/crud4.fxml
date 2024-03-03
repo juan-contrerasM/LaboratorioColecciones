@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="co.edu.uniquindio.laboratoriocolecciones.controllersView.Crud4Productos"
+            prefHeight="400.0" prefWidth="600.0">
+    <VBox spacing="10.0" layoutX="15.0" layoutY="15.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+          AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+        <GridPane hgap="10" vgap="10">
+            <Label text="Código del Producto:"/>
+            <TextField fx:id="txtCodigo" GridPane.columnIndex="1"/>
+            <Label text="Nombre del Producto:" GridPane.rowIndex="1"/>
+            <TextField fx:id="txtNombreProducto" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Label text="Precio:" GridPane.rowIndex="2"/>
+            <TextField fx:id="txtPrecio" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Label text="Cantidad en Inventario:" GridPane.rowIndex="3"/>
+            <TextField fx:id="txtCantidad" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        </GridPane>
+        <Button text="Guardar Producto" onAction="#guardarProducto" maxWidth="Infinity" VBox.vgrow="ALWAYS"/>
+    </VBox>
+</AnchorPane>
+
