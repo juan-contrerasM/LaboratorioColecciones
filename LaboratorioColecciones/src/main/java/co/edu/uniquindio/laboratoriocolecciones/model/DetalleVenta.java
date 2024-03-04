@@ -8,10 +8,7 @@ import lombok.*;
 @ToString// el to string
 @Builder // es aquel que nos permite acceder a estos metodos lombok
 public class DetalleVenta {
-
     private Integer cantidad;
     private String subtotal;
     private String codigoDetaleVenta;
-
-
 }

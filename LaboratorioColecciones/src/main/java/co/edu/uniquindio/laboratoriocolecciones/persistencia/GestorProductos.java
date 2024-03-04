@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class GestorProductos {
     private static HashMap<String, Producto> productos = new HashMap<>();
-
     public static void inicializarProductos() {
         try {
             productos = Persistencia.cargarProductos();

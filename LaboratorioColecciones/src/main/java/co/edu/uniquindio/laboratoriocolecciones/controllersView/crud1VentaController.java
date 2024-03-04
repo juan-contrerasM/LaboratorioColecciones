@@ -170,7 +170,7 @@ public class crud1VentaController implements Initializable {
 
     @FXML
     void agregarVenta(ActionEvent event) throws IOException {
-        //guardar los dtaos en su totalidad
+        //guardar los datos en su totalidad
         if (validarCamposGuardarVenta()) {
             Venta venta = new Venta();
             ventaList = Persistencia.cargarVenta();
@@ -192,6 +192,7 @@ public class crud1VentaController implements Initializable {
                         mostrarMensaje("Se guardo la venta", "Venta guardada con exito", "La venta ha sido guarda", Alert.AlertType.INFORMATION);
                         limpiarCamposVenta();
                         Persistencia.guardarVenta(ventaList);
+                        Persistencia.guardarHistoricoVenta(ventaList);
                     }
                 }
             }
@@ -216,8 +217,6 @@ public class crud1VentaController implements Initializable {
         tableListado.setItems(FXCollections.observableArrayList(AUXILIAR));
 
     }
-
-
     public Cliente buscarCliente() throws IOException {
         listaClienbtes = Persistencia.cargarClientes();
         Persistencia.guardarClientes(listaClienbtes);
@@ -230,7 +229,6 @@ public class crud1VentaController implements Initializable {
 
 
     }
-
     public DetalleVenta buscarDetalleVenta() throws IOException {
         detalleVentaList = Persistencia.cargarDetalleVenta();
         Persistencia.guardarDetalleVenta(detalleVentaList);
@@ -241,14 +239,11 @@ public class crud1VentaController implements Initializable {
         }
         return null;
     }
-
     public boolean buscarVenta() {
         boolean existeVenta = ventaList.stream()
                 .anyMatch(venta1 -> venta1.getCodigoVenta().equals(txtCodigo.getText()));
         return existeVenta;// Ahora 'existeVenta' contiene true si hay una venta con el código especificado, de lo contrario, contiene false
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

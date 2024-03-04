@@ -7,11 +7,15 @@ import co.edu.uniquindio.banco.bancouq.model.*;*/
 
 import co.edu.uniquindio.laboratoriocolecciones.model.*;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static co.edu.uniquindio.laboratoriocolecciones.persistencia.GestorProductos.obtenerProductoPorCodigo;
@@ -28,6 +32,7 @@ public class Persistencia {
     public static final String RUTA_ARCHIVO_VENTA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/ventaTxt";
     public static final String RUTA_ARCHIVO_DETALLE_VENTA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/detalleVentaTxt";
     public static final String RUTA_ARCHIVO_CARRITO_COMPRA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/carritosCompra";
+    public static final String RUTA_ARCHIVO_HISTORICO_VENTAS = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/historicoVentas";
     /**
      * Guarda en un archivo de texto todos la información de las personas almacenadas en el ArrayList
      *
@@ -45,17 +50,14 @@ public class Persistencia {
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_CLIENTES, contenido, false);
     }
-
     //productos
     public static void guardarProductos(HashMap<String, Producto> listaProductos) throws IOException {
         String contenido = "";
         for (Producto producto : listaProductos.values()) {
             contenido += producto.getCodigo() + "," + producto.getNombreProducto() + "," + producto.getPrecio() + "," + producto.getCantidad() + "\n"; // Usar comas como separador
         }
-        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
+        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, true);
     }
-
-
     //detalle venta
     public static void guardarDetalleVenta(ArrayList<DetalleVenta> detalleVentas) throws IOException {
         // TODO Auto-generated method stub
@@ -69,8 +71,7 @@ public class Persistencia {
     public static void guardarCarritoCompras(CarritoCompras carritoDeCompras) throws IOException {
         String contenido = "";
         for (Map.Entry<String, Producto> entry : carritoDeCompras.getProductos().entrySet()) {
-            // Asumiendo que cada producto en el HashMap también tiene una cantidad
-            contenido += entry.getKey() + "," + entry.getValue().getCantidad() + "\n"; // Separador ',' entre código y cantidad, '\n' para nueva línea
+            contenido += entry.getKey() + "," + entry.getValue().getCantidad() + "\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
     }
@@ -84,6 +85,17 @@ public class Persistencia {
             +"--"+venta.getDetalleVenta().getSubtotal()+"--"+venta.getDetalleVenta().getCantidad()+"\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_VENTA, contenido, false);
+    }
+
+    public static void guardarHistoricoVenta(ArrayList<Venta> ventas) throws IOException {
+        LinkedList<Venta> ventasLinkedList = new LinkedList<>(ventas);
+        // TODO Auto-generated method stub
+        String contenido = "";
+        for (Venta venta : ventasLinkedList) {
+            contenido += venta.getCodigoVenta()+ "--" + venta.getFechaVenta() + "--" + venta.getCliente().getNombre()+"--"+venta.getCliente().getNumeroId()+"--"+venta.getCliente().getDireccion()+"--"+venta.getDetalleVenta().getCodigoDetaleVenta()
+                    +"--"+venta.getDetalleVenta().getSubtotal()+"--"+venta.getDetalleVenta().getCantidad()+"\n";
+        }
+        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_HISTORICO_VENTAS, contenido, true);
     }
 
 //	--------------------------------------------CARGAR ARCHIVOS----------------------------------------------------------
@@ -196,5 +208,29 @@ public class Persistencia {
             ventas.add(venta);
         }
         return ventas;
+    }
+    public static LinkedList<Venta> cargarHistoricoVentas() throws FileNotFoundException, IOException {
+        LinkedList<Venta> historicoVentas = new LinkedList<>();
+        List<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_HISTORICO_VENTAS);
+        for (String linea : contenido) {
+            String[] partes = linea.split("--");
+            if (partes.length >= 8) {
+                Venta venta = new Venta();
+                Cliente cliente = new Cliente();
+                DetalleVenta detalleVenta = new DetalleVenta();
+                venta.setCodigoVenta(partes[0]);
+                venta.setFechaVenta(LocalDate.parse(partes[1], DateTimeFormatter.ISO_LOCAL_DATE));
+                cliente.setNombre(partes[2]);
+                cliente.setNumeroId(partes[3]);
+                cliente.setDireccion(partes[4]);
+                detalleVenta.setCodigoDetaleVenta(partes[5]);
+                detalleVenta.setSubtotal(partes[6]);
+                detalleVenta.setCantidad(Integer.parseInt(partes[7]));
+                venta.setCliente(cliente);
+                venta.setDetalleVenta(detalleVenta);
+                historicoVentas.add(venta);
+            }
+        }
+        return historicoVentas;
     }
 }

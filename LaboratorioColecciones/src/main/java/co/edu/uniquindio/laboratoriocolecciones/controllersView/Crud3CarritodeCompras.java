@@ -3,9 +3,12 @@ package co.edu.uniquindio.laboratoriocolecciones.controllersView;
 import co.edu.uniquindio.laboratoriocolecciones.model.CarritoCompras;
 import co.edu.uniquindio.laboratoriocolecciones.model.Producto;
 import co.edu.uniquindio.laboratoriocolecciones.persistencia.GestorProductos;
+import co.edu.uniquindio.laboratoriocolecciones.persistencia.Persistencia;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Crud3CarritodeCompras {
@@ -24,12 +27,17 @@ public class Crud3CarritodeCompras {
         Producto producto = productosDisponibles.get(codigo);
 
         if (producto != null) {
-            carritoDeCompras.agregarProducto(producto, 1); // Asume que este método existe y agrega el producto al carrito.
+            carritoDeCompras.agregarProducto(producto, 1);
             listaProductos.getItems().add(producto.getNombreProducto() + " ProductoEjemplo");
-            // Actualiza la UI como sea necesario, por ejemplo, limpiando el campo de texto.
             codigoProducto.clear();
+
+            // Intenta guardar el carrito actualizado en el archivo.
+            try {
+                Persistencia.guardarCarritoCompras(carritoDeCompras);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
-            // Mostrar mensaje al usuario de que el producto no se encontró.
             System.out.println("Producto no encontrado.");
         }
     }
