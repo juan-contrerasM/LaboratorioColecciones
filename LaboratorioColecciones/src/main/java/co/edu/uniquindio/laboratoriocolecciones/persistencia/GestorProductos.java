@@ -7,13 +7,10 @@ import java.util.HashMap;
 public class GestorProductos {
     private static HashMap<String, Producto> productos = new HashMap<>();
     public static void inicializarProductos() {
-        try {
-            productos = Persistencia.cargarProductos();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
     public static HashMap<String, Producto> getProductos() {
+        productos=Persistencia.cargarProductos();
         return productos;
     }
     public static Producto obtenerProductoPorCodigo(String codigo) {

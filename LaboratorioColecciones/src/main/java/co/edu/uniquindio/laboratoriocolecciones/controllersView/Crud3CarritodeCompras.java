@@ -24,6 +24,8 @@ public class Crud3CarritodeCompras {
     @FXML
     protected void agregarProductoPorCodigo() {
         String codigo = codigoProducto.getText();
+        productosDisponibles=GestorProductos.getProductos();
+
         Producto producto = productosDisponibles.get(codigo);
 
         if (producto != null) {
