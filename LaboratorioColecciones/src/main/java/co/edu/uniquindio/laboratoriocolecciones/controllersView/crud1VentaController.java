@@ -136,7 +136,7 @@ public class crud1VentaController implements Initializable {
 
     private ArrayList<Venta> ventaList = new ArrayList<>();
 
-    private HashMap<String, Cliente> listaClienbtes;
+    private HashMap<String, Cliente> listaClienbtes=new HashMap<>();
 
     @FXML
     void GuardarDetalleVenta(ActionEvent event) throws IOException {
@@ -217,8 +217,12 @@ public class crud1VentaController implements Initializable {
         tableListado.setItems(FXCollections.observableArrayList(AUXILIAR));
 
     }
+    private ArrayList<Cliente> lista= new ArrayList<>();
     public Cliente buscarCliente() throws IOException {
-        listaClienbtes = Persistencia.cargarClientes();
+        lista = Persistencia.cargarClientes();
+        for(int i=0; i<lista.size();i++){
+            listaClienbtes.put(lista.get(i).getNumeroId(),lista.get(i));
+        }
         Persistencia.guardarClientes(listaClienbtes);
         return listaClienbtes.get(txtIdentificacion.getText());
     }
@@ -339,6 +343,5 @@ public class crud1VentaController implements Initializable {
     }
 
 }
-
 
 

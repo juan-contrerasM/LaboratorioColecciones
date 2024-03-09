@@ -26,13 +26,13 @@ public class Persistencia {
 
     //--------------------------------------RUTAS----------------------------------------
 
-    public static final String RUTA_ARCHIVO_CLIENTES = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
-    public static final String RUTA_ARCHIVO_PRODUCTOS = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/productoTxt";
+    public static final String RUTA_ARCHIVO_CLIENTES = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/clientesTxtt";
+    public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/productoTxt";
 
-    public static final String RUTA_ARCHIVO_VENTA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/ventaTxt";
-    public static final String RUTA_ARCHIVO_DETALLE_VENTA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/detalleVentaTxt";
-    public static final String RUTA_ARCHIVO_CARRITO_COMPRA = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/carritosCompra";
-    public static final String RUTA_ARCHIVO_HISTORICO_VENTAS = "LaboratorioColecciones/src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/historicoVentas";
+    public static final String RUTA_ARCHIVO_VENTA = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/ventaTxt";
+    public static final String RUTA_ARCHIVO_DETALLE_VENTA = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/detalleVentaTxt";
+    public static final String RUTA_ARCHIVO_CARRITO_COMPRA = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/carritosCompra";
+    public static final String RUTA_ARCHIVO_HISTORICO_VENTAS = "src/main/resources/co/edu/uniquindio/laboratoriocolecciones/persistencia/historicoVentas";
     /**
      * Guarda en un archivo de texto todos la información de las personas almacenadas en el ArrayList
      *
@@ -109,8 +109,8 @@ public class Persistencia {
      */
 
     //productos
-    public static HashMap<String, Cliente> cargarClientes() throws FileNotFoundException, IOException {
-        HashMap<String, Cliente> clientes = new HashMap<String, Cliente>();
+    public static ArrayList<Cliente> cargarClientes() throws FileNotFoundException, IOException {
+        ArrayList<Cliente> clientes = new ArrayList<>();
         ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_CLIENTES);
         String linea = "";
         for (int i = 0; i < contenido.size(); i++) {
@@ -119,10 +119,12 @@ public class Persistencia {
             cliente.setNumeroId(linea.split("--")[0]);
             cliente.setNombre(linea.split("--")[1]);
             cliente.setDireccion(linea.split("--")[2]);
-            clientes.put(cliente.getNumeroId(), cliente);
+            clientes.add(cliente);
         }
         return clientes;
     }
+
+
 
     public static HashMap<String, Producto> cargarProductos() {
         HashMap<String, Producto> productos = new HashMap<>();

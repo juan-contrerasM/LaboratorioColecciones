@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -16,11 +17,12 @@
    <children>
       <Pane fx:id="pane_lista_cliente" layoutX="503.0" layoutY="32.0" prefHeight="472.0" prefWidth="546.0" stylesheets="@../css/color.css">
          <children>
-            <TableView layoutX="34.0" layoutY="102.0" prefHeight="313.0" prefWidth="478.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn fx:id="tabla_detalle_cliente" prefWidth="75.0" text="C2" />
-              </columns>
+            <TableView fx:id="tabla_detalle_cliente" layoutX="34.0" layoutY="102.0" onMouseClicked="#seleccionarCliente" prefHeight="313.0" prefWidth="478.0">
+               <columns>
+                  <TableColumn fx:id="columnaNombre" prefWidth="167.0" text="Nombre" />
+                  <TableColumn fx:id="columnaNIdentificacion" prefWidth="139.0" text="Numero identificacion" />
+                  <TableColumn fx:id="columnaDireccion" prefWidth="171.0" text="Direccion" />
+               </columns>
             </TableView>
             <Pane fx:id="pane_btn_lista_clientes" layoutX="280.0" layoutY="15.0" prefHeight="64.0" prefWidth="228.0" stylesheets="@../css/color.css">
                <children>
@@ -74,5 +76,6 @@
             </Pane>
          </children>
       </Pane>
+      <Accordion />
    </children>
 </AnchorPane>
